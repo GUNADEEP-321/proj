@@ -1,15 +1,15 @@
-/* --- Dark Theme Variables --- */
+/* --- Dark Theme Variables (New Palette based on your image) --- */
 :root {
-    --primary-bg: #1a1a2e; /* Dark background for major sections */
-    --secondary-bg: #16213e; /* Slightly lighter dark for alternating sections */
-    --card-bg: #0f3460; /* Even lighter dark for cards */
-    --text-color: #e0e0e0; /* Light text for contrast */
-    --heading-color: #e94560; /* Vibrant accent for headings */
-    --accent-color: #3498db; /* Blue accent for buttons, links, etc. */
-    --accent-hover: #2980b9; /* Darker blue on hover */
-    --border-color: #e94560; /* Accent for borders */
-    --shadow-color: rgba(0, 0, 0, 0.4); /* Darker shadows */
-    --navbar-bg: #0d131f; /* Even darker for navbar */
+    --primary-bg: #1A1A2E; /* Keep a similar dark background for major sections, but can be adjusted */
+    --secondary-bg: #15203A; /* Slightly lighter dark for alternating sections, blue-ish tint */
+    --card-bg: #0F2740; /* Even lighter dark for cards, deeper blue */
+    --text-color: #E0E0E0; /* Light text for contrast (same as before) */
+    --heading-color: #00BCD4; /* Vibrant Turquoise from your image as primary accent for headings */
+    --accent-color: #00BCD4; /* Vibrant Turquoise as primary accent for buttons, links etc. */
+    --accent-hover: #00A3BF; /* Slightly darker Turquoise on hover */
+    --border-color: #00BCD4; /* Turquoise for borders (same as accent) */
+    --shadow-color: rgba(0, 0, 0, 0.4); /* Darker shadows (same as before) */
+    --navbar-bg: #0D162A; /* Even darker for navbar, subtle blue tint */
 }
 
 
@@ -29,41 +29,66 @@ body {
     overflow-x: hidden; /* Prevent horizontal scrollbar from appearing due to loading overlay */
 }
 
-/* Loading Overlay Styles */
-#loading-overlay {
+/* === Skeleton Loader === */
+#skeleton-loader {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--primary-bg); /* Match dark theme */
+    background: var(--primary-bg);
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 100px 20px;
+    gap: 40px;
+}
+
+.skeleton-hero {
+    width: 90%;
+    max-width: 1000px;
+    height: 250px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #1A1A2E 8%, #2A3F5B 18%, #1A1A2E 33%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+.skeleton-section {
     display: flex;
     justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
+    gap: 20px;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    width: 90%;
 }
 
-.spinner {
-    border: 8px solid var(--card-bg); /* Match theme */
-    border-top: 8px solid var(--accent-color); /* Match theme */
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    animation: spin 1s linear infinite;
+.skeleton-card {
+    width: 300px;
+    height: 180px;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #0F2740 8%, #2A3F5B 18%, #0F2740 33%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+    box-shadow: 0 4px 15px var(--shadow-color);
 }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* When the overlay is hidden */
-body.loaded #loading-overlay {
+/* Hide skeleton after 3s */
+body.loaded #skeleton-loader {
     opacity: 0;
     visibility: hidden;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 
@@ -119,6 +144,7 @@ body.loaded #loading-overlay {
     transition: color 0.3s ease;
 }
 
+/* Base style for the underline effect */
 .navbar .nav-links a::after {
     content: '';
     position: absolute;
@@ -129,6 +155,15 @@ body.loaded #loading-overlay {
     background-color: var(--accent-color);
     transition: width 0.3s ease;
     border-radius: 3px;
+}
+
+/* Active state for navigation links */
+.navbar .nav-links a.active {
+    color: var(--accent-color);
+}
+
+.navbar .nav-links a.active::after {
+    width: 100%; /* Full underline for active link */
 }
 
 .navbar .nav-links a:hover {
@@ -173,7 +208,7 @@ body.loaded #loading-overlay {
 
 /* Hero Section */
 .hero-section {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://via.placeholder.com/1500x800/1a1a2e/e0e0e0?text=Abstract+Dark+Background') no-repeat center center/cover; /* Placeholder background matching dark theme */
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://via.placeholder.com/1500x800/1A1A2E/00BCD4?text=Abstract+Dark+Background') no-repeat center center/cover; /* Placeholder background matching dark theme */
     color: var(--text-color);
     text-align: center;
     padding: 150px 0 100px; /* Adjust top padding for fixed navbar */
@@ -322,9 +357,9 @@ h2::after {
     color: var(--text-color);
 }
 
-/* Projects Section with Navigation */
+/* Projects Section with Native Horizontal Scrolling */
 .projects-section {
-    position: relative; /* Needed for absolute positioning of arrows */
+    position: relative;
 }
 
 .project-carousel-wrapper {
@@ -334,17 +369,24 @@ h2::after {
 }
 
 .project-grid {
-    display: grid; /* Default to grid for larger screens */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    max-width: 1000px;
-    margin: 0 auto;
-    overflow-x: hidden; /* Hide overflow, JS will handle scroll */
-    scroll-behavior: smooth; /* For smooth JS scrolling */
-    padding-bottom: 20px; /* Space for potential scrollbar area */
+    display: flex; /* Use flex for horizontal layout */
+    flex-wrap: nowrap; /* Prevent wrapping */
+    overflow-x: scroll; /* Enable horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    scroll-snap-type: x mandatory; /* Enable mandatory scroll snapping on x-axis */
+    gap: 30px; /* Space between cards */
+    padding: 0 20px 20px; /* Add padding to the sides and bottom for scrollbar */
+    max-width: 100%; /* Allow it to take full width */
+    margin: 0 auto; /* Center the grid */
+    scrollbar-width: thin; /* Firefox scrollbar */
+    scrollbar-color: var(--accent-color) var(--card-bg); /* Firefox scrollbar colors */
 }
 
+/* Style individual project items for scroll snapping */
 .project-item {
+    flex-shrink: 0; /* Prevent items from shrinking */
+    width: 300px; /* Define a fixed width for each card */
+    scroll-snap-align: start; /* Snap to the start of the item */
     background-color: var(--card-bg); /* Dark card background */
     padding: 25px;
     border-radius: 8px;
@@ -377,39 +419,11 @@ h2::after {
     font-size: 1.1em;
 }
 
-/* Carousel Navigation Arrows */
+/* Hide Carousel Navigation Arrows */
 .carousel-nav-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(52, 152, 219, 0.8); /* Blue with transparency */
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 1.5em;
-    border-radius: 5px;
-    z-index: 10;
-    transition: background-color 0.3s ease, opacity 0.3s ease;
-    opacity: 0; /* Hidden by default, shown on mobile */
-    display: none; /* Hide by default on larger screens */
+    display: none; /* Hide buttons completely */
 }
 
-.carousel-nav-btn:hover {
-    background-color: var(--accent-hover);
-}
-
-.carousel-nav-btn.left {
-    left: 0px; /* Position relative to wrapper */
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-}
-
-.carousel-nav-btn.right {
-    right: 0px; /* Position relative to wrapper */
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
 
 /* Education Section */
 .education-item {
@@ -573,36 +587,34 @@ footer p {
         gap: 20px;
     }
 
-    /* Projects grid: Use flex for JS controlled horizontal scrolling */
+    /* Projects grid: Enhanced for native horizontal scroll with snapping */
     .project-grid {
-        display: flex; /* Change to flex for horizontal layout */
-        flex-wrap: nowrap; /* Prevent wrapping */
-        overflow-x: hidden; /* Hide scrollbar, JS will handle movement */
-        scroll-snap-type: none; /* Disable native scroll-snap for JS control */
-        padding-left: 15px; /* Add some padding on the sides */
-        padding-right: 15px;
-        margin-left: -15px; /* Counteract container padding */
-        margin-right: -15px;
-        width: calc(100% + 30px); /* Adjust width to span full viewport */
-        max-width: none; /* Remove max-width restriction for horizontal scroll */
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: scroll; /* Allow manual horizontal scrolling */
+        scroll-snap-type: x mandatory; /* Enable mandatory snapping */
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        gap: 20px; /* Space between cards */
+        padding: 0 15px 20px; /* Padding for the sides and bottom for scrollbar */
+        margin-left: auto; /* Ensure centering */
+        margin-right: auto;
+        max-width: calc(100% - 30px); /* Adjust max-width to consider padding */
+        /* Remove explicit width/margin adjustments from previous version */
     }
 
     .project-item {
-        flex-shrink: 0; /* Prevent items from shrinking */
+        flex-shrink: 0;
         width: 85vw; /* Make each card take up a good portion of viewport width */
         max-width: 350px; /* Max width for consistency */
-        margin-right: 20px; /* Space between cards */
-        box-shadow: 0 4px 10px var(--shadow-color);
-        border-radius: 8px;
+        scroll-snap-align: start; /* Snap to the start of the item */
+        /* Removed margin-right as gap handles spacing now */
     }
 
-    .project-item:last-child {
-        margin-right: 15px; /* Ensure last item has padding on the right */
-    }
+    /* No need for project-item:last-child margin as gap handles it */
 
-    /* Show carousel navigation arrows on small screens */
+    /* Hide carousel navigation arrows on small screens (already hidden globally) */
     .carousel-nav-btn {
-        display: block; /* Show arrows */
+        display: none;
     }
 
     .education-item {
@@ -674,14 +686,30 @@ footer p {
 }
 /* Dark scrollbars for Webkit browsers */
 body::-webkit-scrollbar {
-  width: 10px;
+    width: 10px;
 }
 
 body::-webkit-scrollbar-track {
-  background: var(--primary-bg);
+    background: var(--primary-bg);
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: var(--accent-color);
-  border-radius: 10px;
+    background-color: var(--accent-color);
+    border-radius: 10px;
+}
+
+/* Custom scrollbar for .project-grid (Webkit) */
+.project-grid::-webkit-scrollbar {
+    height: 8px; /* height of horizontal scrollbar */
+}
+
+.project-grid::-webkit-scrollbar-track {
+    background: var(--card-bg);
+    border-radius: 10px;
+}
+
+.project-grid::-webkit-scrollbar-thumb {
+    background-color: var(--accent-color);
+    border-radius: 10px;
+    border: 2px solid var(--card-bg); /* A border around the thumb */
 }
