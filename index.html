@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gunadeep</title>
+    <meta name="description" content="Gunadeep's Portfolio - A 10th class student passionate about web development.">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="assets/guna.png" >
+    <meta name="author" content="Gunadeep">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8FRGGTFJ9B"></script>
+    <link rel="icon" href="assets/g.png">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8FRGGTFJ9B"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -17,18 +18,24 @@
 
   gtag('config', 'G-8FRGGTFJ9B');
 </script>
-    <!-- 100% privacy-first analytics -->
-<script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-
-<style>
-
-</style>
 </head>
 <body>
 
-    <div id="loading-overlay">
-        <div class="spinner"></div>
-    </div>
+    <!-- === Skeleton Loader Start === -->
+<div id="skeleton-loader">
+  <div class="skeleton-hero"></div>
+  <div class="skeleton-section">
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+  </div>
+  <div class="skeleton-section">
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+  </div>
+</div>
+<!-- === Skeleton Loader End === -->
 
     <nav class="navbar">
         <div class="container">
@@ -50,7 +57,7 @@
 
     <section id="hero" class="hero-section">
         <div class="container">
-            <img src="assets/Guna.png" alt="Gunadeep's Profile Picture" class="profile-img"> <h1>Hi, I'm Gunadeep!</h1>
+            <img src="assets/WhatsApp Image 2025-07-16 at 6.58.25 PM.jpeg" alt="Gunadeep's Profile Picture" class="profile-img"> <h1>Hi, I'm Gunadeep!</h1>
             <p>10th Class Student &amp; Aspiring Web Developer</p>
             <a href="#contact" class="btn">Get in Touch</a>
         </div>
@@ -127,9 +134,7 @@
                         <a href="#" class="btn project-btn">View Project (Coming Soon)</a>
                     </div>
                 </div>
-                <button class="carousel-nav-btn left" aria-label="Scroll Left"><i class="fas fa-chevron-left"></i></button>
-                <button class="carousel-nav-btn right" aria-label="Scroll Right"><i class="fas fa-chevron-right"></i></button>
-            </div>
+                </div>
             <p class="coming-soon-text">More exciting projects are coming soon as I learn and grow!</p>
         </div>
     </section>
@@ -151,7 +156,7 @@
             <p>I'm always open to learning, collaborating, or discussing new ideas. Feel free to reach out!</p>
             <div class="contact-info">
                 <p><strong>Email:</strong> <a href="mailto:puligundlagunadeep321@gmail.com">Send me a Mail through Gmail</a></p>
-                <p><strong>GitHub:</strong> <a href="https://github.com/GUNADEEP-321/" target="_blank">You can see My Dashboard in Our WEbsite</a></p>
+                <p><strong>GitHub:</strong> <a href="https://github.com/GUNADEEP-321/" target="_blank" rel="noopener noreferrer">You can see My Dashboard in Our WEbsite</a></p>
             </div>
             <p class="cta-message">Let's connect and build something amazing!</p>
         </div>
@@ -159,7 +164,8 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Gunadeep. All rights reserved. Made with 10<sup>th</sup> Class GUNADEEP</p>
+            <p>&copy; 2025 Gunadeep. All rights reserved. Made with <span style="color: aqua;">GUNADEEP</span> by a 10<sup>th</sup> Class Student.</p>
+
         </div>
     </footer>
 
@@ -223,74 +229,6 @@
         });
 
 
-        // === Horizontal Project Carousel (with JS for navigation) ===
-        const projectGrid = document.querySelector('.project-grid');
-        const leftArrow = document.querySelector('.carousel-nav-btn.left');
-        const rightArrow = document.querySelector('.carousel-nav-btn.right');
-
-        // Check if the project carousel elements exist before adding listeners
-        if (projectGrid && leftArrow && rightArrow) {
-            leftArrow.addEventListener('click', () => {
-                // Scroll left by the width of one project item + its margin
-                const itemWidth = projectGrid.querySelector('.project-item').offsetWidth;
-                const gap = 20; // As defined in CSS for .project-item margin-right
-                projectGrid.scrollBy({
-                    left: -(itemWidth + gap),
-                    behavior: 'smooth'
-                });
-            });
-
-            rightArrow.addEventListener('click', () => {
-                // Scroll right by the width of one project item + its margin
-                const itemWidth = projectGrid.querySelector('.project-item').offsetWidth;
-                const gap = 20; // As defined in CSS for .project-item margin-right
-                projectGrid.scrollBy({
-                    left: (itemWidth + gap),
-                    behavior: 'smooth'
-                });
-            });
-
-            // Hide/show arrows based on scroll position and screen size
-            const checkScrollArrows = () => {
-                // Only show arrows if on mobile (screen width <= 768px)
-                if (window.innerWidth <= 768) {
-                    const scrollLeft = projectGrid.scrollLeft;
-                    const scrollWidth = projectGrid.scrollWidth;
-                    const clientWidth = projectGrid.clientWidth;
-
-                    // Show/hide left arrow
-                    if (scrollLeft > 0) {
-                        leftArrow.style.opacity = '1';
-                        leftArrow.style.pointerEvents = 'auto'; // Enable clicks
-                    } else {
-                        leftArrow.style.opacity = '0';
-                        leftArrow.style.pointerEvents = 'none'; // Disable clicks
-                    }
-
-                    // Show/hide right arrow
-                    // Adding a tolerance (e.g., -5) because scrollWidth vs clientWidth can sometimes have minor floating point differences
-                    if (scrollLeft + clientWidth < scrollWidth - 5) {
-                        rightArrow.style.opacity = '1';
-                        rightArrow.style.pointerEvents = 'auto';
-                    } else {
-                        rightArrow.style.opacity = '0';
-                        rightArrow.style.pointerEvents = 'none';
-                    }
-                } else {
-                    // Hide arrows on desktop
-                    leftArrow.style.opacity = '0';
-                    leftArrow.style.pointerEvents = 'none';
-                    rightArrow.style.opacity = '0';
-                    rightArrow.style.pointerEvents = 'none';
-                }
-            };
-
-            projectGrid.addEventListener('scroll', checkScrollArrows);
-            window.addEventListener('resize', checkScrollArrows); // Re-check on resize
-            checkScrollArrows(); // Initial check on load
-        }
-
-
         // === Fade-in Sections on Scroll ===
         const sections = document.querySelectorAll('section:not(.hero-section)'); // Exclude hero section
 
@@ -318,6 +256,65 @@
             document.querySelector('.hero-section').classList.add('fade-in');
         });
 
+
+        // === Active Navbar Link on Scroll ===
+        const allSections = document.querySelectorAll('section');
+        const navLinksList = document.querySelectorAll('.navbar .nav-links a');
+
+        const highlightActiveNavLink = () => {
+            let currentActiveSectionId = '';
+
+            allSections.forEach(section => {
+                const sectionTop = section.offsetTop - document.querySelector('.navbar').offsetHeight; // Adjust for fixed navbar height
+                const sectionHeight = section.clientHeight;
+
+                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                    currentActiveSectionId = section.id;
+                }
+            });
+
+            // If at the very top (before any section is in view), default to #hero or #about
+            if (window.scrollY === 0) {
+                 currentActiveSectionId = 'hero'; // Or 'about' if you want the first visible content section
+            }
+
+
+            navLinksList.forEach(link => {
+                link.classList.remove('active'); // Remove active from all first
+                if (link.getAttribute('href').includes(currentActiveSectionId)) {
+                    link.classList.add('active'); // Add active to the current one
+                }
+            });
+        };
+
+        // Run on scroll and on load
+        window.addEventListener('scroll', highlightActiveNavLink);
+        window.addEventListener('DOMContentLoaded', highlightActiveNavLink);
+        window.addEventListener('resize', highlightActiveNavLink); // Also update on resize
+
     </script>
+    <script>
+window.addEventListener('load', () => {
+    // Wait for 3 seconds
+    setTimeout(() => {
+        document.body.classList.add('loaded');
+
+        const loadingOverlay = document.getElementById('loading-overlay');
+        if (loadingOverlay) {
+            loadingOverlay.addEventListener('transitionend', () => {
+                loadingOverlay.style.display = 'none';
+            }, { once: true });
+        }
+
+        const skeletonLoader = document.getElementById('skeleton-loader');
+        if (skeletonLoader) {
+            skeletonLoader.addEventListener('transitionend', () => {
+                skeletonLoader.style.display = 'none';
+            }, { once: true });
+        }
+    }, 3000); // 3 seconds
+});
+</script>
+
 </body>
 </html>
