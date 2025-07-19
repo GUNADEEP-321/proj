@@ -317,7 +317,6 @@ h2::after {
     font-size: 1.1em;
     max-width: 800px;
     margin: 0 auto 15px;
-    text-align: left;
     font-family: 'Roboto', sans-serif;
     color: var(--text-color);
 }
