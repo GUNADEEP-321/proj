@@ -313,7 +313,7 @@ h2::after {
 }
 
 /* About Section */
-.about-section p {
+.about-section, .education-item p {
     font-size: 1.1em;
     max-width: 800px;
     margin: 0 auto 15px;
@@ -428,26 +428,19 @@ h2::after {
 /* Education Section */
 .education-item {
     max-width: 800px;
-    margin: 0 auto;
-    background-color: var(--card-bg); /* Dark card background */
-    padding: 30px;
+    margin: 0 auto 15px;
+    /* background-color: var(--card-bg);  Dark card background */
+    /*padding: 30px;*/
     border-radius: 8px;
     box-shadow: 0 4px 15px var(--shadow-color);
     text-align: left;
-    border-left: 5px solid var(--accent-color); /* Accent border */
+   /* border-left: 5px solid var(--accent-color);  Accent border */
 }
 
 .education-item h3 {
     color: var(--heading-color); /* Accent for subheadings */
     margin-bottom: 10px;
     font-size: 1.6em;
-}
-
-.education-item p {
-    font-family: 'Roboto', sans-serif;
-    color: var(--text-color);
-    margin-bottom: 8px;
-    line-height: 1.8;
 }
 
 /* Contact Section */
