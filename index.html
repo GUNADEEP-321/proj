@@ -8,10 +8,18 @@
     <meta name="google-adsense-account" content="ca-pub-7594563892763632">
     <link rel="stylesheet" href="style.css">
     <meta name="author" content="Gunadeep">
+    <script defer src="script.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="assets/g.png">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-8FRGGTFJ9B"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("cWFfPBuCwa6gkEv1A");
+        })();
+    </script>
+
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -166,11 +174,43 @@
         <div class="container">
             <h2>Get in Touch</h2>
             <p>I'm always open to learning, collaborating, or discussing new ideas. Feel free to reach out!</p>
+            
+            <form id="contactForm" class="contact-form">
+                <div class="form-group">
+                    <input type="text" id="name" name="name" placeholder=" " required>
+                    <label for="name">Name:</label>
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <input type="tel" id="mobile" name="mobile" placeholder=" " required>
+                    <label for="mobile">Phone:</label>
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder=" " required>
+                    <label for="email">Email:</label>
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <textarea id="message" name="message" placeholder=" " required></textarea>
+                    <label for="message">Message:</label>
+                    <div class="error-message"></div>
+                </div>
+
+                <button type="submit" class="btn submit-btn">
+                    <i class="fas fa-paper-plane mr-2"></i>
+                    Send Message
+                </button>
+            </form>
+
             <div class="contact-info">
-                <p><strong>Email:</strong> <a href="mailto:puligundlagunadeep321@gmail.com">Send me a Mail through Gmail</a></p>
-                <p><strong>GitHub:</strong> <a href="https://github.com/GUNADEEP-321/" target="_blank" rel="noopener noreferrer">You can see My Dashboard in Our Website</a></p>
+                <p><strong>Or reach me directly:</strong></p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:puligundlagunadeep321@gmail.com">puligundlagunadeep321@gmail.com</a></p>
+                <p><i class="fab fa-github"></i> <a href="https://github.com/GUNADEEP-321/" target="_blank" rel="noopener noreferrer">GitHub Profile</a></p>
             </div>
-            <p class="cta-message">Let's connect and build something amazing!</p>
         </div>
     </section>
 
@@ -181,9 +221,7 @@
         </div>
     </footer>
 
-    <button id="backToTopBtn" title="Go to top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+
 
     <script>
         // === Page Loading Effect ===
@@ -196,23 +234,7 @@
             }, { once: true });
         });
 
-        // === Back to Top Button ===
-        const backToTopBtn = document.getElementById('backToTopBtn');
 
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) { // Show button after scrolling 300px
-                backToTopBtn.style.display = 'block';
-            } else {
-                backToTopBtn.style.display = 'none';
-            }
-        });
-
-        backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth' // Smooth scroll to top
-            });
-        });
 
         // === Smooth Scrolling for Navbar Links & Mobile Menu Close ===
         const navLinks = document.getElementById('nav-menu');
@@ -327,6 +349,5 @@ window.addEventListener('load', () => {
     }, 3000); // 3 seconds
 });
 </script>
-
 </body>
 </html>
